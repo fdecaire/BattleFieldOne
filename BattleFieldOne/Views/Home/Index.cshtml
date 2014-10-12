@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Frank DeCaire">
+
+    <title>Frank DeCaire</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="~/Content/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/css/bootstrap-theme.css" rel="stylesheet" />
+    <link href="~/Content/css/main_style.css" rel="stylesheet" />
+
+</head>
+
+<body>
+
+
+    @using (Html.BeginForm())
+    {
+        <div><br /></div>
+        <div style="float:left;">&nbsp;<input type='submit' name='btnNext' id='btnNext' value='Next Phase' onclick='NextTurn(); return false;' style='width:100px;' >&nbsp;</div>
+        <div id='TurnPhaseText' style='float:left;color:blue;font-size:18px;font-weight:bold;'>@ViewBag.TurnPhaseDescription</div>
+        <div style="float:right;"><input type='submit' value='New Game' name='btnNewGame' />&nbsp;</div>
+        <div><br /></div>
+        <div><br /><br /><br /><br /><br /></div>
+        <div style="text-align:center;">
+        @Html.Raw(ViewBag.GameData)
+        </div>
+    }
+
+    <!-- JavaScript -->
+    <script src="~/Content/js/jquery-1.10.2.js"></script>
+    <script src="~/Content/js/bootstrap.js"></script>
+    <script src="~/Content/js/main.js"></script>
+    <script src="~/Content/js/battle_field_one.js"></script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+C:\Users\Frank\Documents\Visual Studio 2012\Projects\FrankDeCaire3\BattleFieldOne\bin\Debug\BattleFieldOne.dll
+C:\Users\Frank\Documents\Visual Studio 2012\Projects\FrankDeCaire3\BattleFieldOne\bin\Debug\BattleFieldOne.pdb
+C:\Users\Frank\Documents\Visual Studio 2012\Projects\FrankDeCaire3\BattleFieldOne\bin\Debug\UnitTestHelpers.dll
+C:\Users\Frank\Documents\Visual Studio 2012\Projects\FrankDeCaire3\BattleFieldOne\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Frank\Documents\Visual Studio 2012\Projects\FrankDeCaire3\BattleFieldOne\bin\Debug\UnitTestHelpers.pdb
+C:\Users\Frank\Documents\Visual Studio 2012\Projects\FrankDeCaire3\BattleFieldOne\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Frank\Documents\Visual Studio 2012\Projects\FrankDeCaire3\BattleFieldOne\obj\Debug\BattleFieldOne.csprojResolveAssemblyReference.cache
+C:\Users\Frank\Documents\Visual Studio 2012\Projects\FrankDeCaire3\BattleFieldOne\obj\Debug\BattleFieldOne.dll
+C:\Users\Frank\Documents\Visual Studio 2012\Projects\FrankDeCaire3\BattleFieldOne\obj\Debug\BattleFieldOne.pdb

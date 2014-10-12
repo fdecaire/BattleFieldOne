@@ -1,0 +1,210 @@
+﻿html, body 
+{
+    font-family:Arial,Verdana;
+    font-size:12px;
+    padding:0;
+    margin:0;
+    margin-top: 25px;
+}
+img
+{
+	border: 0;
+}
+
+/*
+li
+{
+    margin-left: 0;
+    margin-right: 10%;
+    margin-top: .5em;
+    margin-bottom: .5em;
+}
+*/
+.TwoColBlockTitle
+{
+    text-align:center;
+    font-size:16px;
+    font-weight:bold;
+}
+.PictTitle
+{
+    text-align:center;
+    font-size:14px;
+    font-style:italic;
+    font-weight:bold;
+}
+.PictCenter
+{
+    text-align:center;
+}
+
+.CodeFont
+{
+    font-family:'Courier New';
+    font-size:14px;
+}
+.BlogStyles
+{
+    font-family:Arial;
+    font-size:14px;
+}
+.CodeAqua
+{
+    color:#2b91af;
+}
+.CodeRed
+{
+    color:#cf4415;
+}
+.CodeBlue
+{
+    color:#0000ff;
+}
+.CodeGreen
+{
+    color:#008000;
+}
+.top-menu
+{
+
+}
+
+.header-pict
+{
+    width:100%;
+    padding:0;
+    margin:0;
+}
+
+.header-container
+{
+    padding:0;
+}
+
+.divider-line
+{
+    background-image: url('img/gray_2dot.png');
+    background-repeat: repeat-x;
+    height:2px;
+    width:100%;
+}
+
+.header-title
+{
+    font-family:Arial;
+    font-size:18px;
+    color:gray;
+    padding:10px;
+}
+
+.contact-block
+{
+    padding:10px;
+    font-family:Arial;
+    font-size:16px;
+}
+
+    .contact-block li
+    {
+        color:gray;
+        padding:3px;
+    }
+
+        .contact-block li a
+        {
+            color:blue;
+        }
+
+    .contact-block .contact-title
+    {
+        padding:10px;
+        font-weight:bold;
+    }
+
+.hobby-block
+{
+    padding:10px;
+    font-family:Arial;
+    font-size:16px;
+}
+
+    .hobby-block li
+    {
+        color:gray;
+        padding:2px;
+    }
+
+        .hobby-block li a
+        {
+            color:blue;
+        }
+
+.hobby-block .blog-post-title
+{
+    padding: 5px;
+    font-weight: bold;
+}
+
+.hobby-block .hobbies-post-title
+{
+    padding: 5px;
+    font-weight: bold;
+}
+
+.fullwidth-center
+{
+    width:100%;
+    text-align:center;
+}
+
+.red-text
+{
+    color:red;
+    font-style:italic;
+}
+
+.astronomy-block
+{
+    font-family:Arial;
+    font-size:16px;
+}
+
+.bold
+{
+    font-weight:bold;
+}
+
+.photo-block
+{
+    font-family:Arial;
+    font-size:16px;
+}
+
+.nhibernate-block
+{
+    font-family:Arial;
+    font-size:16px;
+}
+
+.code
+{
+    font-family: Courier New, Courier, monospace;
+}
+
+.navbar-brand
+{
+    font-size:24px;
+    font-weight:bold;
+    color:white;
+}
+
+.navbar-brand a
+{
+    color:#999;
+    text-decoration:none;
+}
+
+    .navbar-brand a:hover
+    {
+        color:white;
+    }
