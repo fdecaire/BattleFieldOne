@@ -21,6 +21,11 @@ namespace BattleFieldOneCore
 		private int Iterations = 0; // if we go through too many iterations, then assume no path possible
 		private ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
+		public ShortestPath()
+		{
+			this.gameBoard = null;
+		}
+
 		public ShortestPath(int startX, int startY, int endX, int endY, GameBoard gameBoard)
 		{
 			this.gameBoard = gameBoard;

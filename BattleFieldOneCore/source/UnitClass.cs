@@ -21,7 +21,7 @@ namespace BattleFieldOneCore
 		public int DestY; // used by enemy units only
 		public bool Destroyed; // flag to indicate unit has been destroyed but not removed from the list yet
 		public bool UnitHasAttackedThisTurn;
-		public ShortestPath Path;
+		public ShortestPath Path = new ShortestPath();
 
 		public UnitClass(int piUnitType, NATIONALITY pNationality, int piX, int piY, int piUnitNumber)
 		{
