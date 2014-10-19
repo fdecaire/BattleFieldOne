@@ -209,17 +209,22 @@ namespace BattleFieldOneCore
 
 		public List<MapCoordinates> FindAdjacentCells(int X, int Y)
 		{
-			//TODO: form a list of 6 cells surrounding the current unit minus any occupied cells or edge cells
 			List<MapCoordinates> list = new List<MapCoordinates>();
 
 			if (Y - 1 >= 0)
 			{
-				list.Add(new MapCoordinates(X, Y - 1));
+				if (!Map[X, Y - 1].Blocked)
+				{ 
+					list.Add(new MapCoordinates(X, Y - 1)); 
+				}
 			}
 
 			if (Y + 1 < MaxY)
 			{
-				list.Add(new MapCoordinates(X, Y + 1));
+				if (!Map[X, Y + 1].Blocked)
+				{
+					list.Add(new MapCoordinates(X, Y + 1));
+				}
 			}
 
 			if (X % 2 == 1)
@@ -227,18 +232,30 @@ namespace BattleFieldOneCore
 				// odd (y and y+1)
 				if (X - 1 >= 0)
 				{
-					list.Add(new MapCoordinates(X - 1, Y));
+					if (!Map[X - 1, Y].Blocked)
+					{
+						list.Add(new MapCoordinates(X - 1, Y));
+					}
 					if (Y + 1 < MaxY)
 					{
-						list.Add(new MapCoordinates(X - 1, Y + 1));
+						if (!Map[X - 1, Y + 1].Blocked)
+						{
+							list.Add(new MapCoordinates(X - 1, Y + 1));
+						}
 					}
 				}
 				if (X + 1 < MaxX)
 				{
-					list.Add(new MapCoordinates(X + 1, Y));
+					if (!Map[X + 1, Y].Blocked)
+					{
+						list.Add(new MapCoordinates(X + 1, Y));
+					}
 					if (Y + 1 < MaxY)
 					{
-						list.Add(new MapCoordinates(X + 1, Y + 1));
+						if (!Map[X + 1, Y + 1].Blocked)
+						{
+							list.Add(new MapCoordinates(X + 1, Y + 1));
+						}
 					}
 				}
 			}
@@ -247,18 +264,30 @@ namespace BattleFieldOneCore
 				// even (y and y-1)
 				if (X - 1 >= 0)
 				{
-					list.Add(new MapCoordinates(X - 1, Y));
+					if (!Map[X - 1, Y].Blocked)
+					{
+						list.Add(new MapCoordinates(X - 1, Y));
+					}
 					if (Y - 1 >= 0)
 					{
-						list.Add(new MapCoordinates(X - 1, Y - 1));
+						if (!Map[X - 1, Y - 1].Blocked)
+						{
+							list.Add(new MapCoordinates(X - 1, Y - 1));
+						}
 					}
 				}
 				if (X + 1 < MaxX)
 				{
-					list.Add(new MapCoordinates(X + 1, Y));
+					if (!Map[X + 1, Y].Blocked)
+					{
+						list.Add(new MapCoordinates(X + 1, Y));
+					}
 					if (Y - 1 >= 0)
 					{
-						list.Add(new MapCoordinates(X + 1, Y - 1));
+						if (!Map[X + 1, Y - 1].Blocked)
+						{
+							list.Add(new MapCoordinates(X + 1, Y - 1));
+						}
 					}
 				}
 			}
@@ -382,6 +411,21 @@ namespace BattleFieldOneCore
 					break;
 				case 1:
 					hexPngName = "city_hex";
+					break;
+				case 2:
+					hexPngName = "terrain_grass_01";
+					break;
+				case 3:
+					hexPngName = "terrain_grass_02";
+					break;
+				case 4:
+					hexPngName = "terrain_grass_03";
+					break;
+				case 5:
+					hexPngName = "terrain_grass_04";
+					break;
+				case 6:
+					hexPngName = "mountains_01";
 					break;
 			}
 

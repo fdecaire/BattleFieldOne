@@ -198,10 +198,10 @@ function DoGermanEvents()
 
 		if (laEvent[0] == 'T') {
 			var liUnitNumber = laEvent[1];
-			var lnDestX = laEvent[2];
-			var lnDestY = laEvent[3];
-			var lnDestX = lnDestX * 54.75 + 35.25;
-			var lnDestY = lnDestY * 62.5 + 31.25 * (lnDestY % 2) + 31.25;
+			var liX = laEvent[2];
+			var liY = laEvent[3];
+			var lnDestX = liX * 54.75 + 35.25;
+			var lnDestY = liY * 62.5 + 31.25 * (liX % 2) + 31.25;
 
 			var lObjectLayer = document.getElementById('Unit' + liUnitNumber);
 			if (lObjectLayer) {
@@ -210,10 +210,10 @@ function DoGermanEvents()
 
 				var loLine = document.getElementById('UnitDest' + liUnitNumber);
 				if (loLine) {
-					loLine.setAttribute('x1', lnDestX);
-					loLine.setAttribute('y1', lnDestY);
-					loLine.setAttribute('x2', lnUnitX);
-					loLine.setAttribute('y2', lnUnitY);
+					loLine.setAttribute('x1', lnUnitX);
+					loLine.setAttribute('y1', lnUnitY);
+					loLine.setAttribute('x2', lnDestX);
+					loLine.setAttribute('y2', lnDestY);
 				}
 			}
 

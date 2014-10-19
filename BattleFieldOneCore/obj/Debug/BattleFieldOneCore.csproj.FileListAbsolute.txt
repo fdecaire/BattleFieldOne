@@ -9,9 +9,10 @@ C:\Users\Frank\Documents\Visual Studio 2012\Projects\FrankDeCaire3\BattleFieldOn
 C:\Users\Frank\Documents\Visual Studio 2012\Projects\FrankDeCaire3\BattleFieldOne\obj\Debug\BattleFieldOne.pdb
 C:\Users\Frank\Documents\Visual Studio 2012\Projects\BattleFieldOne4\BattleFieldOneCore\bin\Debug\BattleFieldOne.dll
 C:\Users\Frank\Documents\Visual Studio 2012\Projects\BattleFieldOne4\BattleFieldOneCore\bin\Debug\BattleFieldOne.pdb
+C:\Users\Frank\Documents\Visual Studio 2012\Projects\BattleFieldOne4\BattleFieldOneCore\bin\Debug\log4net.dll
 C:\Users\Frank\Documents\Visual Studio 2012\Projects\BattleFieldOne4\BattleFieldOneCore\bin\Debug\UnitTestHelpers.dll
-C:\Users\Frank\Documents\Visual Studio 2012\Projects\BattleFieldOne4\BattleFieldOneCore\bin\Debug\Newtonsoft.Json.dll
 C:\Users\Frank\Documents\Visual Studio 2012\Projects\BattleFieldOne4\BattleFieldOneCore\bin\Debug\UnitTestHelpers.pdb
+C:\Users\Frank\Documents\Visual Studio 2012\Projects\BattleFieldOne4\BattleFieldOneCore\bin\Debug\log4net.xml
 C:\Users\Frank\Documents\Visual Studio 2012\Projects\BattleFieldOne4\BattleFieldOneCore\bin\Debug\Newtonsoft.Json.xml
 C:\Users\Frank\Documents\Visual Studio 2012\Projects\BattleFieldOne4\BattleFieldOneCore\obj\Debug\BattleFieldOneCore.csprojResolveAssemblyReference.cache
 C:\Users\Frank\Documents\Visual Studio 2012\Projects\BattleFieldOne4\BattleFieldOneCore\obj\Debug\BattleFieldOne.dll

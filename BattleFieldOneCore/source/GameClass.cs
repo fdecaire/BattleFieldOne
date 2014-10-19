@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Diagnostics;
 using UnitTestHelpersNS;
+using System.Drawing;
+using log4net;
 
 //TODO: there is a bug that resets the pieces moved counters when the browser is refreshed allowing the user to move anywhere in one turn.
 //TODO: random terrain squares
@@ -20,6 +22,11 @@ namespace BattleFieldOneCore
 	{
 		public UnitsList AllUnits = new UnitsList();
 		public GameBoard gameBoard = new GameBoard();
+
+		public GameClass()
+		{
+			log4net.Config.XmlConfigurator.Configure();
+		}
 
 		public void RecomputeMapMask()
 		{
@@ -213,7 +220,13 @@ namespace BattleFieldOneCore
 				{
 					if (AllUnits.Items[i].Command == UNITCOMMAND.Destination)
 					{
-						MapCoordinates lCoordinates = FindNextMove(i);
+						MapCoordinates lCoordinates = AllUnits.Items[i].Path.GetNextWaypoint(AllUnits.Items[i].X, AllUnits.Items[i].Y);
+
+						if (lCoordinates == null)
+						{
+							// use the destination set, if there is one
+							lCoordinates = FindNextMove(i);
+						}
 
 						// check to see if the map is occupied by another unit
 						if (lCoordinates != null)
@@ -265,11 +278,14 @@ namespace BattleFieldOneCore
 			{
 				if (!AllUnits.MapOccupied(surroundingCells[i].X, surroundingCells[i].Y))
 				{
-					double distance = BattleFieldOneCommonObjects.Distance(surroundingCells[i].X, surroundingCells[i].Y, AllUnits.Items[unitNumber].DestX, AllUnits.Items[unitNumber].DestY);
-					if (distance < shortestDistance)
+					//if (gameBoard.Map[surroundingCells[i].X, surroundingCells[i].Y].Terrain != 6) //TODO: redundant
 					{
-						shortestDistance = distance;
-						shortestDistanceItem = i;
+						double distance = BattleFieldOneCommonObjects.Distance(surroundingCells[i].X, surroundingCells[i].Y, AllUnits.Items[unitNumber].DestX, AllUnits.Items[unitNumber].DestY);
+						if (distance < shortestDistance)
+						{
+							shortestDistance = distance;
+							shortestDistanceItem = i;
+						}
 					}
 				}
 			}
@@ -371,6 +387,17 @@ namespace BattleFieldOneCore
 					AllUnits.AddUnit(1, NATIONALITY.Allied, 1, 2);
 					AllUnits.AddUnit(1, NATIONALITY.German, 1, 1);
 					break;
+				case 3:
+					InitializeCustomGame(7, 6);
+					for (int i = 0; i < 4; i++)
+					{
+						gameBoard.Map[3, i + 1].Terrain = 6;
+					}
+
+					AllUnits.AddUnit(1, NATIONALITY.German, 0, 3);
+					AllUnits.AddUnit(2, NATIONALITY.Allied, 6, 5);
+					gameBoard.Map[6, 3].Terrain = 1;
+					break;
 			}
 
 			RecomputeMapMask();
@@ -392,7 +419,7 @@ namespace BattleFieldOneCore
 
 			int liUnitsInGroup = liTotalGermanUnits / gameBoard.TotalCities;
 
-			// this means that we can't hold all 4 cities (because there are less than 4 units), just try to block the allied units
+			// this means that we can't hold all 4 cities (because there are less units than cities), just try to block the allied units
 			if (liUnitsInGroup < 1)
 			{
 				liUnitsInGroup = 1;
@@ -418,6 +445,8 @@ namespace BattleFieldOneCore
 					AllUnits.Items[liNextClosestGermanUnit].DestX = gameBoard.CityList[i].X;
 					AllUnits.Items[liNextClosestGermanUnit].DestY = gameBoard.CityList[i].Y;
 
+					AllUnits.Items[liNextClosestGermanUnit].ComputePath(gameBoard);
+
 					liTotalUnitsAssigned++;
 				}
 			}
@@ -433,6 +462,8 @@ namespace BattleFieldOneCore
 						AllUnits.Items[i].Command = UNITCOMMAND.Destination;
 						AllUnits.Items[i].DestX = closestCity.X;
 						AllUnits.Items[i].DestY = closestCity.Y;
+
+						AllUnits.Items[i].ComputePath(gameBoard);
 					}
 				}
 			}

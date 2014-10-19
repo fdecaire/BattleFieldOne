@@ -30,8 +30,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net, Version=1.2.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>3rdPartyDLLs\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -40,6 +49,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="source\AStarNode.cs" />
+    <Compile Include="source\AStarNodeList.cs" />
     <Compile Include="source\BattleResultCalculator.cs" />
     <Compile Include="source\BattleResultEnum.cs" />
     <Compile Include="source\DieRoller.cs" />
@@ -49,15 +60,20 @@
     <Compile Include="source\GameClass.cs" />
     <Compile Include="source\MapCoordinates.cs" />
     <Compile Include="source\BattleFieldOneCommonObjects.cs" />
+    <Compile Include="source\ShortestPath.cs" />
     <Compile Include="source\UnitClass.cs" />
     <Compile Include="source\UnitCommandEnum.cs" />
     <Compile Include="source\UnitsList.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\UnitTestHelpers\UnitTestHelpers.csproj">
+    <ProjectReference Include="..\..\BattleFieldOne4\UnitTestHelpers\UnitTestHelpers.csproj">
       <Project>{cb5fec9f-7d74-4e55-bc03-8f90fe633498}</Project>
       <Name>UnitTestHelpers</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="3rdPartyDLLs\log4net.dll" />
+    <Content Include="3rdPartyDLLs\log4net.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

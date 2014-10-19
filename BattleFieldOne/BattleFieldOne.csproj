@@ -39,7 +39,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net, Version=1.2.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>3rdPartyDLLs\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -65,9 +72,6 @@
     <Reference Include="Microsoft.Web.Mvc.FixedDisplayModes, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.Mvc.FixedDisplayModes.1.0.0\lib\net40\Microsoft.Web.Mvc.FixedDisplayModes.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http">
     </Reference>
@@ -119,6 +123,32 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="3rdPartyDLLs\log4net.dll" />
+    <Content Include="3rdPartyDLLs\log4net.xml" />
+    <Content Include="3rdPartyDLLs\Microsoft.Web.Infrastructure.dll" />
+    <Content Include="3rdPartyDLLs\Microsoft.Web.Mvc.FixedDisplayModes.dll" />
+    <Content Include="3rdPartyDLLs\System.Net.Http.dll" />
+    <Content Include="3rdPartyDLLs\System.Net.Http.Formatting.dll" />
+    <Content Include="3rdPartyDLLs\System.Net.Http.Formatting.xml" />
+    <Content Include="3rdPartyDLLs\System.Net.Http.WebRequest.dll" />
+    <Content Include="3rdPartyDLLs\System.Net.Http.WebRequest.xml" />
+    <Content Include="3rdPartyDLLs\System.Net.Http.xml" />
+    <Content Include="3rdPartyDLLs\System.Web.Helpers.dll" />
+    <Content Include="3rdPartyDLLs\System.Web.Helpers.xml" />
+    <Content Include="3rdPartyDLLs\System.Web.Http.dll" />
+    <Content Include="3rdPartyDLLs\System.Web.Http.WebHost.dll" />
+    <Content Include="3rdPartyDLLs\System.Web.Http.WebHost.xml" />
+    <Content Include="3rdPartyDLLs\System.Web.Http.xml" />
+    <Content Include="3rdPartyDLLs\System.Web.Mvc.dll" />
+    <Content Include="3rdPartyDLLs\System.Web.Mvc.xml" />
+    <Content Include="3rdPartyDLLs\System.Web.Razor.dll" />
+    <Content Include="3rdPartyDLLs\System.Web.Razor.xml" />
+    <Content Include="3rdPartyDLLs\System.Web.WebPages.Deployment.dll" />
+    <Content Include="3rdPartyDLLs\System.Web.WebPages.Deployment.xml" />
+    <Content Include="3rdPartyDLLs\System.Web.WebPages.dll" />
+    <Content Include="3rdPartyDLLs\System.Web.WebPages.Razor.dll" />
+    <Content Include="3rdPartyDLLs\System.Web.WebPages.Razor.xml" />
+    <Content Include="3rdPartyDLLs\System.Web.WebPages.xml" />
     <Content Include="Content\css\bootstrap-theme.css" />
     <Content Include="Content\css\bootstrap-theme.min.css" />
     <Content Include="Content\css\bootstrap.css" />
@@ -129,7 +159,12 @@
     <Content Include="Content\img\blank_hex.png" />
     <Content Include="Content\img\city_hex.png" />
     <Content Include="Content\img\grass_background_hex.png" />
+    <Content Include="Content\img\mountains_01.png" />
     <Content Include="Content\img\tank.png" />
+    <Content Include="Content\img\terrain_grass_01.png" />
+    <Content Include="Content\img\terrain_grass_02.png" />
+    <Content Include="Content\img\terrain_grass_03.png" />
+    <Content Include="Content\img\terrain_grass_04.png" />
     <Content Include="Content\img\troop.png" />
     <Content Include="Content\js\AstronomyConstellatons.js" />
     <Content Include="Content\js\battle_field_one.js" />
@@ -151,9 +186,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\css\bootstrap-theme.css.map" />
