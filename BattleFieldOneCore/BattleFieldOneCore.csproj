@@ -66,7 +66,7 @@
     <Compile Include="source\UnitsList.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\BattleFieldOne4\UnitTestHelpers\UnitTestHelpers.csproj">
+    <ProjectReference Include="..\UnitTestHelpers\UnitTestHelpers.csproj">
       <Project>{cb5fec9f-7d74-4e55-bc03-8f90fe633498}</Project>
       <Name>UnitTestHelpers</Name>
     </ProjectReference>

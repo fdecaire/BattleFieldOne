@@ -11,7 +11,7 @@ namespace BattleFieldOneCore
 		public int MaxX = 1;
 		public int MaxY = 1;
 		public GameMap[,] Map = new GameMap[1, 1];
-		public bool TestMode = true;
+		public bool TestMode = false;
 
 		public static int _totalCities = -1;
 		public int TotalCities
