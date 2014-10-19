@@ -71,6 +71,8 @@
     <Content Include="3rdPartyDLLs\FluentNHibernate.XML" />
     <Content Include="3rdPartyDLLs\Iesi.Collections.dll" />
     <Content Include="3rdPartyDLLs\Iesi.Collections.xml" />
+    <Content Include="3rdPartyDLLs\Newtonsoft.Json.dll" />
+    <Content Include="3rdPartyDLLs\Newtonsoft.Json.xml" />
     <Content Include="3rdPartyDLLs\NHibernate.dll" />
     <Content Include="3rdPartyDLLs\NHibernate.xml" />
   </ItemGroup>

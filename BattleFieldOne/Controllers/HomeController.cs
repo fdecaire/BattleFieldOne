@@ -28,7 +28,7 @@ namespace BattleFieldOne.Controllers
 				if (Session["gGameData"] == null)
 				{
 					GameData = new GameClass();
-					GameData.InitializeGame(1);
+					GameData.InitializeGame(4);
 					Session["gGameData"] = GameData;
 				}
 				else

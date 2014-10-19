@@ -13,18 +13,20 @@ namespace BattleFieldOneCore
 		public bool Visible { get; set; } // hide cells not visible to allied units
 		public int Overlay { get; set; } // -1 = no overlay, 0-n = terrain overlay
 		private static Random RandomNumberGenerator = new Random(DateTime.Now.Millisecond);
-		public bool Blocked
+		public bool Blocked(int unitType)
 		{
-			get
+			if (Terrain == 6) // add any blockable terrain number to this list
 			{
-				if (Terrain == 6) // add any blockable terrain number to this list
-				{
-					return true;
-				}
-				else
-				{
-					return false;
-				}
+				return true;
+			}
+			else if (Terrain == 7 && unitType == 2)
+			{
+				// tanks cannot penetrate forests
+				return true;
+			}
+			else
+			{
+				return false;
 			}
 		}
 

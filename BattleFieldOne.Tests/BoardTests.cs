@@ -87,7 +87,7 @@ namespace BattleFieldOne.Tests
 				gameBoard.Map[3, i + 1].Terrain = 6;
 			}
 
-			List<MapCoordinates> surroundingCells = gameBoard.FindAdjacentCells(0,0).OrderBy(u => u.X).ThenBy(u => u.Y).ToList();
+			List<MapCoordinates> surroundingCells = gameBoard.FindAdjacentCells(0, 0, 2).OrderBy(u => u.X).ThenBy(u => u.Y).ToList();
 
 			Assert.AreEqual(2, surroundingCells.Count);
 			Assert.AreEqual(0, surroundingCells[0].X);
@@ -108,7 +108,7 @@ namespace BattleFieldOne.Tests
 				gameBoard.Map[3, i + 1].Terrain = 6;
 			}
 
-			List<MapCoordinates> surroundingCells = gameBoard.FindAdjacentCells(0, 3).OrderBy(u => u.X).ThenBy(u => u.Y).ToList();
+			List<MapCoordinates> surroundingCells = gameBoard.FindAdjacentCells(0, 3, 2).OrderBy(u => u.X).ThenBy(u => u.Y).ToList();
 
 			Assert.AreEqual(4, surroundingCells.Count);
 			Assert.AreEqual(0, surroundingCells[0].X);
@@ -133,7 +133,7 @@ namespace BattleFieldOne.Tests
 				gameBoard.Map[3, i + 1].Terrain = 6;
 			}
 
-			List<MapCoordinates> surroundingCells = gameBoard.FindAdjacentCells(2, 3).OrderBy(u => u.X).ThenBy(u => u.Y).ToList();
+			List<MapCoordinates> surroundingCells = gameBoard.FindAdjacentCells(2, 3, 2).OrderBy(u => u.X).ThenBy(u => u.Y).ToList();
 
 			Assert.AreEqual(4, surroundingCells.Count);
 			Assert.AreEqual(1, surroundingCells[0].X);
@@ -158,7 +158,7 @@ namespace BattleFieldOne.Tests
 				gameBoard.Map[3, i + 1].Terrain = 6;
 			}
 
-			List<MapCoordinates> surroundingCells = gameBoard.FindAdjacentCells(1, 3).OrderBy(u => u.X).ThenBy(u => u.Y).ToList();
+			List<MapCoordinates> surroundingCells = gameBoard.FindAdjacentCells(1, 3, 2).OrderBy(u => u.X).ThenBy(u => u.Y).ToList();
 
 			Assert.AreEqual(6, surroundingCells.Count);
 			Assert.AreEqual(0, surroundingCells[0].X);

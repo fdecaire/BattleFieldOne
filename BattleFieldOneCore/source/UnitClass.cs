@@ -53,7 +53,7 @@ namespace BattleFieldOneCore
 
 		public void ComputePath(GameBoard gameBoard)
 		{
-			Path = new ShortestPath(X, Y, DestX, DestY, gameBoard);
+			Path = new ShortestPath(X, Y, DestX, DestY, gameBoard, UnitType);
 		}
 
 		public string Plot()

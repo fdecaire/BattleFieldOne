@@ -18,6 +18,7 @@ namespace BattleFieldOneCore
 		private int StartY;
 		private int EndX;
 		private int EndY;
+		private int UnitType;
 		private int Iterations = 0; // if we go through too many iterations, then assume no path possible
 		private ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -26,13 +27,14 @@ namespace BattleFieldOneCore
 			this.gameBoard = null;
 		}
 
-		public ShortestPath(int startX, int startY, int endX, int endY, GameBoard gameBoard)
+		public ShortestPath(int startX, int startY, int endX, int endY, GameBoard gameBoard, int unitType)
 		{
 			this.gameBoard = gameBoard;
 			EndX = endX;
 			EndY = endY;
 			StartX = startX;
 			StartY = startY;
+			UnitType = unitType;
 
 			// push the starting cell
 			AStarNode currentNode = new AStarNode(startX, startY, startX, startY, EndX, EndY, 0);
@@ -62,7 +64,7 @@ namespace BattleFieldOneCore
 
 			ClosedList.Push(node);
 
-			List<MapCoordinates> surroundingCells = gameBoard.FindAdjacentCells(node.X, node.Y);
+			List<MapCoordinates> surroundingCells = gameBoard.FindAdjacentCells(node.X, node.Y, UnitType);
 
 			for (int i = 0; i < surroundingCells.Count; i++)
 			{

@@ -9,7 +9,6 @@ using log4net;
 
 //TODO: there is a bug that resets the pieces moved counters when the browser is refreshed allowing the user to move anywhere in one turn.
 //TODO: random terrain squares
-//TODO: terrain pieces that block movement
 //TODO: roads
 //TODO: random city locations
 //TODO: add reinforcements according to cities captured
@@ -269,7 +268,7 @@ namespace BattleFieldOneCore
 
 		private MapCoordinates FindNextMove(int unitNumber)
 		{
-			List<MapCoordinates> surroundingCells = gameBoard.FindAdjacentCells(AllUnits.Items[unitNumber].X, AllUnits.Items[unitNumber].Y);
+			List<MapCoordinates> surroundingCells = gameBoard.FindAdjacentCells(AllUnits.Items[unitNumber].X, AllUnits.Items[unitNumber].Y, AllUnits.Items[unitNumber].UnitType);
 			double shortestDistance = 9999;
 			int shortestDistanceItem = -1;
 
@@ -278,14 +277,11 @@ namespace BattleFieldOneCore
 			{
 				if (!AllUnits.MapOccupied(surroundingCells[i].X, surroundingCells[i].Y))
 				{
-					//if (gameBoard.Map[surroundingCells[i].X, surroundingCells[i].Y].Terrain != 6) //TODO: redundant
+					double distance = BattleFieldOneCommonObjects.Distance(surroundingCells[i].X, surroundingCells[i].Y, AllUnits.Items[unitNumber].DestX, AllUnits.Items[unitNumber].DestY);
+					if (distance < shortestDistance)
 					{
-						double distance = BattleFieldOneCommonObjects.Distance(surroundingCells[i].X, surroundingCells[i].Y, AllUnits.Items[unitNumber].DestX, AllUnits.Items[unitNumber].DestY);
-						if (distance < shortestDistance)
-						{
-							shortestDistance = distance;
-							shortestDistanceItem = i;
-						}
+						shortestDistance = distance;
+						shortestDistanceItem = i;
 					}
 				}
 			}
@@ -387,7 +383,7 @@ namespace BattleFieldOneCore
 					AllUnits.AddUnit(1, NATIONALITY.Allied, 1, 2);
 					AllUnits.AddUnit(1, NATIONALITY.German, 1, 1);
 					break;
-				case 3:
+				case 3: // test mountain cells
 					InitializeCustomGame(7, 6);
 					for (int i = 0; i < 4; i++)
 					{
@@ -398,6 +394,18 @@ namespace BattleFieldOneCore
 					AllUnits.AddUnit(2, NATIONALITY.Allied, 6, 5);
 					gameBoard.Map[6, 3].Terrain = 1;
 					break;
+				case 4: // test forest cells
+					InitializeCustomGame(7, 6);
+					for (int i = 0; i < 4; i++)
+					{
+						gameBoard.Map[3, i + 1].Terrain = 7;
+					}
+
+					AllUnits.AddUnit(1, NATIONALITY.German, 0, 3);
+					AllUnits.AddUnit(2, NATIONALITY.German, 0, 4);
+					AllUnits.AddUnit(2, NATIONALITY.Allied, 6, 0);
+					gameBoard.Map[6, 3].Terrain = 1;
+					break;
 			}
 
 			RecomputeMapMask();
@@ -405,8 +413,7 @@ namespace BattleFieldOneCore
 			SetEnemyStrategy();
 		}
 
-		//TODO: need to change the strategy if the enemy gets down to 4 units and don't have all 4 cities
-		//TODO: if enemy is less than 3 units, then strategy needs to switch to eliminate allied units
+		//TODO: need to change the strategy if the enemy gets down to less units than cities
 		public void SetEnemyStrategy()
 		{
 			// split into 4 groups of units and set each group of units to a different city
@@ -569,9 +576,6 @@ namespace BattleFieldOneCore
 				}
 			}
 		}
-
-		
-
 		
 	}
 }

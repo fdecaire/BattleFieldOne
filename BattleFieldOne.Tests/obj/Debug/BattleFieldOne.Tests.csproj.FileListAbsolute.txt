@@ -36,13 +36,13 @@ C:\Users\Frank\Documents\Visual Studio 2012\Projects\BattleFieldOne4\BattleField
 C:\Users\Frank\Documents\Visual Studio 2012\Projects\BattleFieldOne4\BattleFieldOne.Tests\bin\Debug\BattleFieldOne4.Tests.dll
 C:\Users\Frank\Documents\Visual Studio 2012\Projects\BattleFieldOne4\BattleFieldOne.Tests\bin\Debug\BattleFieldOne4.Tests.pdb
 C:\Users\Frank\Documents\Visual Studio 2012\Projects\BattleFieldOne4\BattleFieldOne.Tests\bin\Debug\BattleFieldOne.dll
-C:\Users\Frank\Documents\Visual Studio 2012\Projects\BattleFieldOne4\BattleFieldOne.Tests\bin\Debug\Newtonsoft.Json.dll
 C:\Users\Frank\Documents\Visual Studio 2012\Projects\BattleFieldOne4\BattleFieldOne.Tests\bin\Debug\UnitTestHelpers.dll
 C:\Users\Frank\Documents\Visual Studio 2012\Projects\BattleFieldOne4\BattleFieldOne.Tests\bin\Debug\log4net.dll
+C:\Users\Frank\Documents\Visual Studio 2012\Projects\BattleFieldOne4\BattleFieldOne.Tests\bin\Debug\Newtonsoft.Json.dll
 C:\Users\Frank\Documents\Visual Studio 2012\Projects\BattleFieldOne4\BattleFieldOne.Tests\bin\Debug\BattleFieldOne.pdb
 C:\Users\Frank\Documents\Visual Studio 2012\Projects\BattleFieldOne4\BattleFieldOne.Tests\bin\Debug\UnitTestHelpers.pdb
-C:\Users\Frank\Documents\Visual Studio 2012\Projects\BattleFieldOne4\BattleFieldOne.Tests\bin\Debug\Newtonsoft.Json.xml
 C:\Users\Frank\Documents\Visual Studio 2012\Projects\BattleFieldOne4\BattleFieldOne.Tests\bin\Debug\log4net.xml
+C:\Users\Frank\Documents\Visual Studio 2012\Projects\BattleFieldOne4\BattleFieldOne.Tests\bin\Debug\Newtonsoft.Json.xml
 C:\Users\Frank\Documents\Visual Studio 2012\Projects\BattleFieldOne4\BattleFieldOne.Tests\obj\Debug\BattleFieldOne.Tests.csprojResolveAssemblyReference.cache
 C:\Users\Frank\Documents\Visual Studio 2012\Projects\BattleFieldOne4\BattleFieldOne.Tests\obj\Debug\BattleFieldOne4.Tests.dll
 C:\Users\Frank\Documents\Visual Studio 2012\Projects\BattleFieldOne4\BattleFieldOne.Tests\obj\Debug\BattleFieldOne4.Tests.pdb

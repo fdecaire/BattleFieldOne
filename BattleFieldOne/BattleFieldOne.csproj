@@ -158,6 +158,7 @@
     <Content Include="Content\css\main_style.css" />
     <Content Include="Content\img\blank_hex.png" />
     <Content Include="Content\img\city_hex.png" />
+    <Content Include="Content\img\forest_01.png" />
     <Content Include="Content\img\grass_background_hex.png" />
     <Content Include="Content\img\mountains_01.png" />
     <Content Include="Content\img\tank.png" />

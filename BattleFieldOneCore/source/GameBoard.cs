@@ -11,7 +11,7 @@ namespace BattleFieldOneCore
 		public int MaxX = 1;
 		public int MaxY = 1;
 		public GameMap[,] Map = new GameMap[1, 1];
-		public bool TestMode = false;
+		public bool TestMode = true;
 
 		public static int _totalCities = -1;
 		public int TotalCities
@@ -207,13 +207,13 @@ namespace BattleFieldOneCore
 			}
 		}
 
-		public List<MapCoordinates> FindAdjacentCells(int X, int Y)
+		public List<MapCoordinates> FindAdjacentCells(int X, int Y, int unitType)
 		{
 			List<MapCoordinates> list = new List<MapCoordinates>();
 
 			if (Y - 1 >= 0)
 			{
-				if (!Map[X, Y - 1].Blocked)
+				if (!Map[X, Y - 1].Blocked(unitType))
 				{ 
 					list.Add(new MapCoordinates(X, Y - 1)); 
 				}
@@ -221,7 +221,7 @@ namespace BattleFieldOneCore
 
 			if (Y + 1 < MaxY)
 			{
-				if (!Map[X, Y + 1].Blocked)
+				if (!Map[X, Y + 1].Blocked(unitType))
 				{
 					list.Add(new MapCoordinates(X, Y + 1));
 				}
@@ -232,13 +232,13 @@ namespace BattleFieldOneCore
 				// odd (y and y+1)
 				if (X - 1 >= 0)
 				{
-					if (!Map[X - 1, Y].Blocked)
+					if (!Map[X - 1, Y].Blocked(unitType))
 					{
 						list.Add(new MapCoordinates(X - 1, Y));
 					}
 					if (Y + 1 < MaxY)
 					{
-						if (!Map[X - 1, Y + 1].Blocked)
+						if (!Map[X - 1, Y + 1].Blocked(unitType))
 						{
 							list.Add(new MapCoordinates(X - 1, Y + 1));
 						}
@@ -246,13 +246,13 @@ namespace BattleFieldOneCore
 				}
 				if (X + 1 < MaxX)
 				{
-					if (!Map[X + 1, Y].Blocked)
+					if (!Map[X + 1, Y].Blocked(unitType))
 					{
 						list.Add(new MapCoordinates(X + 1, Y));
 					}
 					if (Y + 1 < MaxY)
 					{
-						if (!Map[X + 1, Y + 1].Blocked)
+						if (!Map[X + 1, Y + 1].Blocked(unitType))
 						{
 							list.Add(new MapCoordinates(X + 1, Y + 1));
 						}
@@ -264,13 +264,13 @@ namespace BattleFieldOneCore
 				// even (y and y-1)
 				if (X - 1 >= 0)
 				{
-					if (!Map[X - 1, Y].Blocked)
+					if (!Map[X - 1, Y].Blocked(unitType))
 					{
 						list.Add(new MapCoordinates(X - 1, Y));
 					}
 					if (Y - 1 >= 0)
 					{
-						if (!Map[X - 1, Y - 1].Blocked)
+						if (!Map[X - 1, Y - 1].Blocked(unitType))
 						{
 							list.Add(new MapCoordinates(X - 1, Y - 1));
 						}
@@ -278,13 +278,13 @@ namespace BattleFieldOneCore
 				}
 				if (X + 1 < MaxX)
 				{
-					if (!Map[X + 1, Y].Blocked)
+					if (!Map[X + 1, Y].Blocked(unitType))
 					{
 						list.Add(new MapCoordinates(X + 1, Y));
 					}
 					if (Y - 1 >= 0)
 					{
-						if (!Map[X + 1, Y - 1].Blocked)
+						if (!Map[X + 1, Y - 1].Blocked(unitType))
 						{
 							list.Add(new MapCoordinates(X + 1, Y - 1));
 						}
@@ -426,6 +426,9 @@ namespace BattleFieldOneCore
 					break;
 				case 6:
 					hexPngName = "mountains_01";
+					break;
+				case 7:
+					hexPngName = "forest_01";
 					break;
 			}
 
