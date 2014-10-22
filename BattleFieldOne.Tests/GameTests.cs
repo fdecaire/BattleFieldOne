@@ -32,7 +32,7 @@ namespace BattleFieldOne.Tests
 			gameClass.RecomputeMapMask();
 			gameClass.RecomputeMapView();
 
-			gameClass.SetEnemyStrategy();
+			gameClass.SetEnemyStrategy(STRATEGY.Mixed);
 
 			var result = gameClass.CollectGermanAttackData();
 
@@ -60,7 +60,7 @@ namespace BattleFieldOne.Tests
 			gameClass.RecomputeMapMask();
 			gameClass.RecomputeMapView();
 
-			gameClass.SetEnemyStrategy();
+			gameClass.SetEnemyStrategy(STRATEGY.Mixed);
 
 			var result = gameClass.CollectGermanAttackData();
 
@@ -88,7 +88,7 @@ namespace BattleFieldOne.Tests
 			gameClass.RecomputeMapMask();
 			gameClass.RecomputeMapView();
 
-			gameClass.SetEnemyStrategy();
+			gameClass.SetEnemyStrategy(STRATEGY.Mixed);
 
 			var result = gameClass.CollectGermanAttackData();
 
@@ -116,7 +116,7 @@ namespace BattleFieldOne.Tests
 			gameClass.RecomputeMapMask();
 			gameClass.RecomputeMapView();
 
-			gameClass.SetEnemyStrategy();
+			gameClass.SetEnemyStrategy(STRATEGY.Mixed);
 
 			var result = gameClass.CollectGermanAttackData();
 

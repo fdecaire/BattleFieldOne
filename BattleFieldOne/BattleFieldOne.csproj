@@ -156,11 +156,14 @@
     <Content Include="Content\css\img\gray_2dot.png" />
     <Content Include="Content\css\img\gray_dot.png" />
     <Content Include="Content\css\main_style.css" />
+    <Content Include="Content\img\artillery.png" />
+    <Content Include="Content\img\beach_01.png" />
     <Content Include="Content\img\blank_hex.png" />
     <Content Include="Content\img\city_hex.png" />
     <Content Include="Content\img\forest_01.png" />
     <Content Include="Content\img\grass_background_hex.png" />
     <Content Include="Content\img\mountains_01.png" />
+    <Content Include="Content\img\ocean_01.png" />
     <Content Include="Content\img\tank.png" />
     <Content Include="Content\img\terrain_grass_01.png" />
     <Content Include="Content\img\terrain_grass_02.png" />

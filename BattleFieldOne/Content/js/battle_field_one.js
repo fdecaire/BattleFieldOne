@@ -13,15 +13,18 @@ var TestMode = false; // Set this to true to show all pieces for testing
 var MaxX = -1;
 var MaxY = -1;
 
-$(document).ready(function () {
+$(document).ready(function ()
+{
 	MaxX = $('#MaxX').val();
 	MaxY = $('#MaxY').val();
 	TestMode = ($('#TestMode').val() == '1');
 
 	// initialize the ViewMap array
-	for (var y = 0; y < MaxY; y++) {
-		for (var x = 0; x < MaxX; x++) {
-			ViewMap[x] = Array();
+	for (var x = 0; x < MaxX; x++)
+	{
+		ViewMap[x] = Array();
+		for (var y = 0; y < MaxY; y++)
+		{
 			ViewMap[x][y] = false;
 		}
 	}
@@ -29,7 +32,8 @@ $(document).ready(function () {
 	RecomputeMapView();
 
 	var IE = document.all ? true : false;
-	if (!IE) {
+	if (!IE)
+	{
 		document.captureEvents(Event.MOUSEMOVE);
 	}
 
@@ -54,7 +58,7 @@ function SetupEventHandlers()
 	{
 		loSVGObject.onmousedown = MouseDown;
 		loSVGObject.onmousemove = MouseMove;
-		
+
 		loSVGObject.onmouseover = MouseOver;
 		loSVGObject.onmouseout = MouseOut;
 
@@ -117,7 +121,8 @@ function NextTurnReturn(psAJAXResponseText)
 		{
 			var intervalTime = 300;
 
-			if (TestMode) {
+			if (TestMode)
+			{
 				intervalTime = 150;
 			}
 
@@ -147,7 +152,8 @@ function NextTurnReturn(psAJAXResponseText)
 		{
 			var intervalTime = 500;
 
-			if (TestMode) {
+			if (TestMode)
+			{
 				intervalTime = 250;
 			}
 
@@ -196,7 +202,8 @@ function DoGermanEvents()
 	{
 		var laEvent = GermanEvents[GermanEvents.length - 1].split(',');
 
-		if (laEvent[0] == 'T') {
+		if (laEvent[0] == 'T')
+		{
 			var liUnitNumber = laEvent[1];
 			var liX = laEvent[2];
 			var liY = laEvent[3];
@@ -204,12 +211,14 @@ function DoGermanEvents()
 			var lnDestY = liY * 62.5 + 31.25 * (liX % 2) + 31.25;
 
 			var lObjectLayer = document.getElementById('Unit' + liUnitNumber);
-			if (lObjectLayer) {
+			if (lObjectLayer)
+			{
 				var lnUnitX = parseInt(lObjectLayer.getAttribute('canvasx'));
 				var lnUnitY = parseInt(lObjectLayer.getAttribute('canvasy'));
 
 				var loLine = document.getElementById('UnitDest' + liUnitNumber);
-				if (loLine) {
+				if (loLine)
+				{
 					loLine.setAttribute('x1', lnUnitX);
 					loLine.setAttribute('y1', lnUnitY);
 					loLine.setAttribute('x2', lnDestX);
@@ -287,7 +296,8 @@ function DoGermanEvents()
 					loUnit.style.display = 'none';
 				}
 
-				if (TestMode) {
+				if (TestMode)
+				{
 					loUnit.style.display = '';
 				}
 			}
@@ -371,27 +381,33 @@ function DoGermanEvents()
 				else
 					alert('illegal attempt to remove german unit # ' + liGermanUnit);
 			}
-			else if (liResult == 3) {
+			else if (liResult == 3)
+			{
 				// allied unit damaged (subtract from defense)
 				var loUnit = document.getElementById('Defense' + liAlliedUnit);
-				if (loUnit) {
+				if (loUnit)
+				{
 					var defenseNumber = parseInt(loUnit.textContent);
 					loUnit.textContent = (defenseNumber - 1);
 					loUnit.style.fill = 'red';
 				}
-				else {
+				else
+				{
 					alert('illegal attempt to remove german unit # ' + liAlliedUnit);
 				}
 			}
-			else if (liResult == 4) {
+			else if (liResult == 4)
+			{
 				// allied unit damaged (subtract 2 from defense)
 				var loUnit = document.getElementById('Defense' + liAlliedUnit);
-				if (loUnit) {
+				if (loUnit)
+				{
 					var defenseNumber = parseInt(loUnit.textContent);
 					loUnit.textContent = (defenseNumber - 2);
 					loUnit.style.fill = 'red';
 				}
-				else {
+				else
+				{
 					alert('illegal attempt to remove german unit # ' + liAlliedUnit);
 				}
 			}
@@ -478,7 +494,14 @@ function MouseMove(event)
 
 	if (giUnitSelected > -1)
 	{
-		MoveUnit(giUnitSelected);
+		if (giTurnPhase == 0)
+		{
+			MoveUnit(giUnitSelected);
+		}
+		else
+		{
+			AttackUnit(giUnitSelected);
+		}
 	}
 
 	event.preventDefault();
@@ -569,13 +592,16 @@ function KeyDownEvents(event)
 
 function MouseOverUnit(piUnitNumber)
 {
-	if (giTurnPhase > 0) {
+	if (giTurnPhase > 0)
+	{
 		return;
 	}
 
 	var loObj = document.getElementById('UnitRect' + piUnitNumber);
-	if (loObj) {
-		if (!HasUnitBeenMoved(piUnitNumber)) {
+	if (loObj)
+	{
+		if (!HasUnitBeenMoved(piUnitNumber))
+		{
 			loObj.style.stroke = 'red';
 		}
 	}
@@ -583,12 +609,14 @@ function MouseOverUnit(piUnitNumber)
 
 function MouseOutUnit(piUnitNumber)
 {
-	if (giTurnPhase > 0) {
+	if (giTurnPhase > 0)
+	{
 		return;
 	}
 
 	var loObj = document.getElementById('UnitRect' + piUnitNumber);
-	if (loObj) {
+	if (loObj)
+	{
 		loObj.style.stroke = 'black';
 	}
 }
@@ -598,7 +626,7 @@ function MouseDownUnit(piUnitNumber)
 	if (giTurnPhase == 1)
 	{
 		giUnitSelected = piUnitNumber;
-		
+
 		var lObjectLayer = document.getElementById('Unit' + piUnitNumber);
 		if (lObjectLayer)
 		{
@@ -612,9 +640,11 @@ function MouseDownUnit(piUnitNumber)
 		}
 
 		// allied attack phase
-		if (!HasUnitAttackedThisTurn(piUnitNumber)) {
+		if (!HasUnitAttackedThisTurn(piUnitNumber))
+		{
 			var loObj = document.getElementById('UnitRect' + piUnitNumber);
-			if (loObj) {
+			if (loObj)
+			{
 				loObj.style.fill = '#ffaaaa';
 			}
 		}
@@ -648,22 +678,27 @@ function MouseDownUnit(piUnitNumber)
 
 function MouseUpUnit()
 {
-	if (giTurnPhase == 1) {
+	if (giTurnPhase == 1)
+	{
 		// allied attack phase
-		if (!HasUnitAttackedThisTurn(giUnitSelected)) {
+		if (!HasUnitAttackedThisTurn(giUnitSelected))
+		{
 			var loObj = document.getElementById('UnitRect' + giUnitSelected);
-			if (loObj) {
+			if (loObj)
+			{
 				loObj.style.fill = '#d0fed0';
 			}
 
 			var loObj = document.getElementById('UnitRect' + giGermanUnitUnderAttack);
-			if (loObj) {
+			if (loObj)
+			{
 				loObj.style.fill = '#ddd';
 			}
 
 			// ajax the attack request
 
-			if (giGermanUnitUnderAttack > -1) {
+			if (giGermanUnitUnderAttack > -1)
+			{
 				var url = /*CURRENT_URL +*/ "?piAttackGermanUnit=" + giGermanUnitUnderAttack + "&piAlliedUnit=" + giUnitSelected;
 				SjaxCall('GET', url, AttackGermanUnitReturn);
 			}
@@ -723,7 +758,8 @@ function MouseUpUnit()
 function UnMaskRegion(piX, piY)
 {
 	var loMask = document.getElementById('Mask' + piX + "," + piY);
-	if (loMask || TestMode) {
+	if (loMask || TestMode)
+	{
 		loMask.style.display = 'none';
 	}
 
@@ -731,15 +767,17 @@ function UnMaskRegion(piX, piY)
 	if (piY > 0)
 	{
 		var loMask = document.getElementById('Mask' + piX + "," + (piY - 1));
-		if (loMask || TestMode) {
+		if (loMask || TestMode)
+		{
 			loMask.style.display = 'none';
 		}
 	}
 
-	if (piY < MaxY-1)
+	if (piY < MaxY - 1)
 	{
 		var loMask = document.getElementById('Mask' + piX + "," + (piY + 1));
-		if (loMask || TestMode) {
+		if (loMask || TestMode)
+		{
 			loMask.style.display = 'none';
 		}
 	}
@@ -750,30 +788,34 @@ function UnMaskRegion(piX, piY)
 		if (piX > 0)
 		{
 			var loMask = document.getElementById('Mask' + (piX - 1) + "," + piY);
-			if (loMask || TestMode) {
+			if (loMask || TestMode)
+			{
 				loMask.style.display = 'none';
 			}
 
-			if (piY < MaxY-1)
+			if (piY < MaxY - 1)
 			{
 				var loMask = document.getElementById('Mask' + (piX - 1) + "," + (piY + 1));
-				if (loMask || TestMode) {
+				if (loMask || TestMode)
+				{
 					loMask.style.display = 'none';
 				}
 			}
 		}
 
-		if (piX < MaxX-1)
+		if (piX < MaxX - 1)
 		{
 			var loMask = document.getElementById('Mask' + (piX + 1) + "," + piY);
-			if (loMask || TestMode) {
+			if (loMask || TestMode)
+			{
 				loMask.style.display = 'none';
 			}
 
-			if (piY < MaxY-1)
+			if (piY < MaxY - 1)
 			{
 				var loMask = document.getElementById('Mask' + (piX + 1) + "," + (piY + 1));
-				if (loMask || TestMode) {
+				if (loMask || TestMode)
+				{
 					loMask.style.display = 'none';
 				}
 			}
@@ -785,30 +827,34 @@ function UnMaskRegion(piX, piY)
 		if (piX > 0)
 		{
 			var loMask = document.getElementById('Mask' + (piX - 1) + "," + piY);
-			if (loMask || TestMode) {
+			if (loMask || TestMode)
+			{
 				loMask.style.display = 'none';
 			}
 
 			if (piY > 0)
 			{
 				var loMask = document.getElementById('Mask' + (piX - 1) + "," + (piY - 1));
-				if (loMask || TestMode) {
+				if (loMask || TestMode)
+				{
 					loMask.style.display = 'none';
 				}
 			}
 		}
 
-		if (piX < MaxX-1)
+		if (piX < MaxX - 1)
 		{
 			var loMask = document.getElementById('Mask' + (piX + 1) + "," + piY);
-			if (loMask || TestMode) {
+			if (loMask || TestMode)
+			{
 				loMask.style.display = 'none';
 			}
 
 			if (piY > 0)
 			{
 				var loMask = document.getElementById('Mask' + (piX + 1) + "," + (piY - 1));
-				if (loMask || TestMode) {
+				if (loMask || TestMode)
+				{
 					loMask.style.display = 'none';
 				}
 			}
@@ -832,10 +878,12 @@ function AttackGermanUnitReturn(psAJAXResponseText)
 	{
 		// allied unit destroyed
 		var loUnit = document.getElementById('Unit' + liAlliedUnit);
-		if (loUnit) {
+		if (loUnit)
+		{
 			loUnit.parentNode.removeChild(loUnit);
 		}
-		else {
+		else
+		{
 			alert('illegal attempt to remove allied unit # ' + liAlliedUnit);
 		}
 
@@ -845,34 +893,42 @@ function AttackGermanUnitReturn(psAJAXResponseText)
 	{
 		// german unit destroyed
 		var loUnit = document.getElementById('Unit' + liGermanUnit);
-		if (loUnit) {
+		if (loUnit)
+		{
 			loUnit.parentNode.removeChild(loUnit);
 		}
-		else {
+		else
+		{
 			alert('illegal attempt to remove german unit # ' + liGermanUnit);
 		}
 	}
-	else if (liResult == 3) {
+	else if (liResult == 3)
+	{
 		// german unit damaged (subtract from defense)
 		var loUnit = document.getElementById('Defense' + liGermanUnit);
-		if (loUnit) {
+		if (loUnit)
+		{
 			var defenseNumber = parseInt(loUnit.textContent);
 			loUnit.textContent = (defenseNumber - 1);
 			loUnit.style.fill = 'red';
 		}
-		else {
+		else
+		{
 			alert('illegal attempt to remove german unit # ' + liGermanUnit);
 		}
 	}
-	else if (liResult == 4) {
+	else if (liResult == 4)
+	{
 		// german unit damaged (subtract 2 from defense)
 		var loUnit = document.getElementById('Defense' + liGermanUnit);
-		if (loUnit) {
+		if (loUnit)
+		{
 			var defenseNumber = parseInt(loUnit.textContent);
 			loUnit.textContent = (defenseNumber - 2);
 			loUnit.style.fill = 'red';
 		}
-		else {
+		else
+		{
 			alert('illegal attempt to remove german unit # ' + liGermanUnit);
 		}
 	}
@@ -903,8 +959,6 @@ function TopLeftOffset()
 
 function MoveUnit(piUnitNumber)
 {
-	if (giTurnPhase == 0)
-	{
 		// allied move phase
 		var lObjectLayer = document.getElementById('Unit' + piUnitNumber);
 
@@ -921,40 +975,51 @@ function MoveUnit(piUnitNumber)
 		lMouse.x = lMouse.x - gnMoveOffset.x;
 		lMouse.y = lMouse.y - gnMoveOffset.y;
 
-		lMouse = SnapTo(lMouse);
+		lMouse = SnapTo(lMouse, 1);
 
 		lObjectLayer.setAttribute('canvasx', lMouse.x);
 		lObjectLayer.setAttribute('canvasy', lMouse.y);
 
 		lObjectLayer.setAttribute("transform", "translate(" + lMouse.x + " " + lMouse.y + ")");
-	}
-	else if (giTurnPhase == 1)
+}
+
+function AttackUnit(piUnitNumber)
+{
+	// allied attack phase
+	var lObjectLayer = document.getElementById('Unit' + piUnitNumber);
+
+	if (!HasUnitAttackedThisTurn(piUnitNumber))
 	{
-		// allied attack phase
-		var lObjectLayer = document.getElementById('Unit' + piUnitNumber);
+		var lMouse = new Point(gnX, gnY);
 
-		if (!HasUnitAttackedThisTurn(piUnitNumber)) {
-			var lMouse = new Point(gnX, gnY);
+		// the user might not click directly on the center point, so we need to move relative to the center vs. starting mouse coords.
+		if (gnMoveOffset == null)
+		{
+			var lnCanvasX = parseInt(lObjectLayer.getAttribute('canvasx'));
+			var lnCanvasY = parseInt(lObjectLayer.getAttribute('canvasy'));
+			gnMoveOffset = new Point(lMouse.x - lnCanvasX, lMouse.y - lnCanvasY);
+		}
 
-			// the user might not click directly on the center point, so we need to move relative to the center vs. starting mouse coords.
-			if (gnMoveOffset == null) {
-				var lnCanvasX = parseInt(lObjectLayer.getAttribute('canvasx'));
-				var lnCanvasY = parseInt(lObjectLayer.getAttribute('canvasy'));
-				gnMoveOffset = new Point(lMouse.x - lnCanvasX, lMouse.y - lnCanvasY);
-			}
+		lMouse.x = lMouse.x - gnMoveOffset.x;
+		lMouse.y = lMouse.y - gnMoveOffset.y;
 
-			lMouse.x = lMouse.x - gnMoveOffset.x;
-			lMouse.y = lMouse.y - gnMoveOffset.y;
+		// read the attack distance
+		var range = GetAttackRangeOfUnit(piUnitNumber);
 
-			lMouse = SnapTo(lMouse);
+		lMouse = SnapTo(lMouse, range);
 
-			// find unit at lMouse location
-			var lCoord = ComputeMapCoords(lMouse);
+		// find unit at lMouse location
+		var lCoord = ComputeMapCoords(lMouse);
 
-			var liGermanUnitNumber = FindGermanUnitAtCoords(lCoord.x, lCoord.y);
-			if (liGermanUnitNumber > -1) {
+		var liGermanUnitNumber = FindGermanUnitAtCoords(lCoord.x, lCoord.y);
+		if (liGermanUnitNumber > -1)
+		{
+			// see if this map coordinate is visible
+			if (ViewMap[lCoord.x][lCoord.y] == true)
+			{
 				var loObj = document.getElementById('UnitRect' + liGermanUnitNumber);
-				if (loObj) {
+				if (loObj)
+				{
 					loObj.style.fill = '#ffaaaa';
 				}
 
@@ -964,34 +1029,72 @@ function MoveUnit(piUnitNumber)
 	}
 }
 
-function SnapTo(pMouse)
+function GetAttackRangeOfUnit(piUnitNumber)
+{
+	var range = 1;
+	var lObjectLayer = document.getElementById('Range' + piUnitNumber);
+	if (lObjectLayer)
+	{
+		range = parseInt(lObjectLayer.textContent);
+	}
+
+	return range;
+}
+
+function GetMovementOfUnit(piUnitNumber)
+{
+	var movement = 1;
+	var lObjectLayer = document.getElementById('Movement' + piUnitNumber);
+	if (lObjectLayer)
+	{
+		movement = parseInt(lObjectLayer.textContent);
+	}
+
+	return movement;
+}
+
+function SnapTo(pMouse, range)
 {
 	var lPoint = ComputeMapCoords(pMouse);
 
-	var liX = lPoint.x; //Math.round((pMouse.x - 35.25) / 54.75);
+	var liX = lPoint.x;
 
 	// limit movement to edges of the map
 	if (liX >= MaxX)
-		liX = MaX-1;
-	if (liX < 0)
-		liX = 0;
-
-	// limit to range of unit
-	if (Math.abs(liX - giUnitStartX) > 1)
 	{
-		if (liX - giUnitStartX < 0)
-			liX = giUnitStartX - 1;
-		else
-			liX = giUnitStartX + 1;
+		liX = MaX - 1;
 	}
 
-	var liY = lPoint.y; //Math.round((pMouse.y - 31.25 - (31.25 * (liX % 2))) / 62.5);
+	if (liX < 0)
+	{
+		liX = 0;
+	}
+
+	// limit to range of unit
+	if (Math.abs(liX - giUnitStartX) > range)
+	{
+		if (liX - giUnitStartX < 0)
+		{
+			liX = giUnitStartX - range;
+		}
+		else
+		{
+			liX = giUnitStartX + range;
+		}
+	}
+
+	var liY = lPoint.y;
 
 	// limit movement to edges of the map
 	if (liY >= MaxY)
-		liY = MaxY;
+	{
+		liY = MaxY - 1;
+	}
+
 	if (liY < 0)
+	{
 		liY = 0;
+	}
 
 	// limit range of unit
 	if (liX != giUnitStartX)
@@ -1000,39 +1103,54 @@ function SnapTo(pMouse)
 		{
 			// if odd, then y-1, y
 			if (liY > giUnitStartY)
+			{
 				liY = giUnitStartY;
-			else if (liY < giUnitStartY - 1)
-				liY = giUnitStartY - 1;
+			}
+			else if (liY < giUnitStartY - range)
+			{
+				liY = giUnitStartY - range;
+			}
 		}
 		else
 		{
 			// if even, then y, y+1
 			if (liY < giUnitStartY)
+			{
 				liY = giUnitStartY;
-			else if (liY > giUnitStartY + 1)
-				liY = giUnitStartY + 1;
+			}
+			else if (liY > giUnitStartY + range)
+			{
+				liY = giUnitStartY + range;
+			}
 		}
 	}
-	else if (Math.abs(liY-giUnitStartY) > 1)
+	else if (Math.abs(liY - giUnitStartY) > range)
 	{
 		// make sure y-giUnitStartY < 1
 		if (liY < giUnitStartY)
-			liY = giUnitStartY - 1;
+		{
+			liY = giUnitStartY - range;
+		}
 		else
-			liY = giUnitStartY + 1;
+		{
+			liY = giUnitStartY + range;
+		}
 	}
 
 	// if map occupied, then snap unit back to starting position.
 	if (giTurnPhase == 0)
 	{
-		if (MapOccupied(lPoint.x, lPoint.y, giUnitSelected))
+		if (MapOccupied(liX, liY, giUnitSelected))
+		{
+			liX = giUnitStartX;
+			liY = giUnitStartY;
+		}
+		else if (TerrainBlocked(liX, liY, giUnitSelected))
 		{
 			liX = giUnitStartX;
 			liY = giUnitStartY;
 		}
 	}
-
-	//TODO: need to see if unit is starting next to enemy unit and snapping next to same or other enemy unit
 
 	// convert back into screen coordinates
 	var lnX = liX * 54.75 + 35.25;
@@ -1043,10 +1161,33 @@ function SnapTo(pMouse)
 	return lMouse;
 }
 
-function HasUnitAttackedThisTurn(piUnitNumber) {
+function TerrainBlocked(piX, piY, piUnitSelected)
+{
+	if (TerrainMap[piX][piY] == 6 || TerrainMap[piX][piY] == 9)
+	{
+		return true;
+	}
+
+	var unitType = 0;
+	var loUnitType = document.getElementById('UnitType' + piUnitSelected);
+	if (loUnitType)
+	{
+		unitType = parseInt(loUnitType.textContent);
+	}
+
+	if (TerrainMap[piX][piY] == 7 && unitType == 2)
+	{
+		return true;
+	}
+	return false;
+}
+
+function HasUnitAttackedThisTurn(piUnitNumber)
+{
 	// check to see if unit has already been moved
 	loAttackUnit = document.getElementById('UnitAttackedThisTurn' + piUnitNumber);
-	if (loAttackUnit) {
+	if (loAttackUnit)
+	{
 		if (parseInt(loAttackUnit.textContent) == 1)
 		{
 			return true;
@@ -1124,8 +1265,10 @@ function FindGermanUnitAtCoords(piX, piY)
 function RecomputeMapView()
 {
 	// initialize ViewMap array (MaxX x MaxY array)
-	for (var y = 0; y < MaxY; y++) {
-		for (var x = 0; x < MaxX; x++) {
+	for (var y = 0; y < MaxY; y++)
+	{
+		for (var x = 0; x < MaxX; x++)
+		{
 			ViewMap[x][y] = false;
 		}
 	}
@@ -1149,18 +1292,24 @@ function RecomputeMapView()
 	}
 
 	// flip any view masks
-	for (var y = 0; y < MaxY; y++) {
-		for (var x = 0; x < MaxX; x++) {
+	for (var y = 0; y < MaxY; y++)
+	{
+		for (var x = 0; x < MaxX; x++)
+		{
 			var loView = document.getElementById('View' + x + "," + y);
-			if (loView) {
-				if (ViewMap[x][y]) {
+			if (loView)
+			{
+				if (ViewMap[x][y])
+				{
 					loView.style.display = 'none';
 				}
-				else {
+				else
+				{
 					loView.style.display = '';
 				}
 
-				if (TestMode) {
+				if (TestMode)
+				{
 					loView.style.display = 'none';
 				}
 			}
@@ -1189,7 +1338,8 @@ function RecomputeMapView()
 					loUnit.style.display = 'none';
 				}
 
-				if (TestMode) {
+				if (TestMode)
+				{
 					loUnit.style.display = '';
 				}
 			}
@@ -1208,7 +1358,7 @@ function ViewkMapRegion(piX, piY)
 		ViewMap[piX][piY - 1] = true;
 	}
 
-	if (piY < MaxY-1)
+	if (piY < MaxY - 1)
 	{
 		ViewMap[piX][piY + 1] = true;
 	}
@@ -1220,17 +1370,17 @@ function ViewkMapRegion(piX, piY)
 		{
 			ViewMap[piX - 1][piY] = true;
 
-			if (piY < MaxY-1)
+			if (piY < MaxY - 1)
 			{
 				ViewMap[piX - 1][piY + 1] = true;
 			}
 		}
 
-		if (piX < MaxX-1)
+		if (piX < MaxX - 1)
 		{
 			ViewMap[piX + 1][piY] = true;
 
-			if (piY < MaxY-1)
+			if (piY < MaxY - 1)
 			{
 				ViewMap[piX + 1][piY + 1] = true;
 			}
@@ -1249,7 +1399,7 @@ function ViewkMapRegion(piX, piY)
 			}
 		}
 
-		if (piX < MaxX-1)
+		if (piX < MaxX - 1)
 		{
 			ViewMap[piX + 1][piY] = true;
 

@@ -15,12 +15,15 @@ using log4net;
 //TODO: save/restore game from file saved on pc
 //TODO: enhance enemy attack to choose attacking piece more wisely (unit on city, or lowest defense first)
 
+//TODO: enhance conditions of victory
+
 namespace BattleFieldOneCore
 {
 	public class GameClass
 	{
 		public UnitsList AllUnits = new UnitsList();
 		public GameBoard gameBoard = new GameBoard();
+		public VictoryCalculator EndOfGame = new VictoryCalculator();
 
 		public GameClass()
 		{
@@ -42,77 +45,9 @@ namespace BattleFieldOneCore
 
 		public string CheckForEndOfGameCondition()
 		{
-			string lsResult = "";
-
-			// check to see if german units occupy all 4 cities
-			int liTotal = 0;
-			for (int i = 0; i < AllUnits.Items.Count; i++)
-			{
-				if (AllUnits.Items[i].Nationality == NATIONALITY.German)
-				{
-					if (gameBoard.Map[AllUnits.Items[i].X, AllUnits.Items[i].Y].Terrain == 1)
-					{
-						liTotal++;
-					}
-				}
-			}
-
-			if (liTotal == gameBoard.TotalCities)
-			{ 
-				return "Germany Captured All Cities!"; 
-			}
-
-			// check to see if allied units occupy all cities
-			liTotal = 0;
-			for (int i = 0; i < AllUnits.Items.Count; i++)
-			{
-				if (AllUnits.Items[i].Nationality == NATIONALITY.Allied)
-				{
-					if (gameBoard.Map[AllUnits.Items[i].X, AllUnits.Items[i].Y].Terrain == 1)
-					{
-						liTotal++;
-					}
-				}
-			}
-
-			if (liTotal == gameBoard.TotalCities)
-			{
-				return "Allies Captured All Cities!";
-			}
-
-			// check to see if all german units destroyed
-			liTotal = 0;
-			for (int i = 0; i < AllUnits.Items.Count; i++)
-			{
-				if (AllUnits.Items[i].Nationality == NATIONALITY.German)
-				{
-					liTotal++;
-				}
-			}
-
-			if (liTotal == 0)
-			{
-				return "All German Units Destroyed!";
-			}
-
-			// check to see if all allied units destroyed
-			liTotal = 0;
-			for (int i = 0; i < AllUnits.Items.Count; i++)
-			{
-				if (AllUnits.Items[i].Nationality == NATIONALITY.Allied)
-				{
-					liTotal++;
-				}
-			}
-
-			if (liTotal == 0)
-			{
-				return "All Allied Units Destroyed!";
-			}
-
-			return lsResult;
+			return EndOfGame.Result(AllUnits, gameBoard);
 		}
-
+		
 		public string CollectGermanAttackData()
 		{
 			string lsResult = "";
@@ -335,6 +270,10 @@ namespace BattleFieldOneCore
 					AllUnits.AddUnit(1, NATIONALITY.German, 7, 0);
 					AllUnits.AddUnit(1, NATIONALITY.German, 7, 1);
 					AllUnits.AddUnit(1, NATIONALITY.German, 7, 2);
+
+					EndOfGame.AlliesCaptureCitiesToWin(gameBoard.CityList.Count);
+					EndOfGame.GermanCaptureCitiesToWin(gameBoard.CityList.Count);
+					SetEnemyStrategy(STRATEGY.Mixed);
 					break;
 				case 1:
 					gameBoard.InitializeBoard(18, 15);
@@ -374,6 +313,10 @@ namespace BattleFieldOneCore
 					AllUnits.AddUnit(1, NATIONALITY.German, 10, 1);
 					AllUnits.AddUnit(1, NATIONALITY.German, 10, 2);
 					AllUnits.AddUnit(1, NATIONALITY.German, 11, 2);
+
+					EndOfGame.AlliesCaptureCitiesToWin(gameBoard.CityList.Count);
+					EndOfGame.GermanCaptureCitiesToWin(gameBoard.CityList.Count);
+					SetEnemyStrategy(STRATEGY.Mixed);
 					break;
 				case 2:
 					InitializeCustomGame(5, 5);
@@ -382,6 +325,9 @@ namespace BattleFieldOneCore
 					AllUnits.AddUnit(1, NATIONALITY.Allied, 2, 2);
 					AllUnits.AddUnit(1, NATIONALITY.Allied, 1, 2);
 					AllUnits.AddUnit(1, NATIONALITY.German, 1, 1);
+					EndOfGame.AlliesCaptureCitiesToWin(gameBoard.CityList.Count);
+					EndOfGame.GermanCaptureCitiesToWin(gameBoard.CityList.Count);
+					SetEnemyStrategy(STRATEGY.Mixed);
 					break;
 				case 3: // test mountain cells
 					InitializeCustomGame(7, 6);
@@ -393,6 +339,9 @@ namespace BattleFieldOneCore
 					AllUnits.AddUnit(1, NATIONALITY.German, 0, 3);
 					AllUnits.AddUnit(2, NATIONALITY.Allied, 6, 5);
 					gameBoard.Map[6, 3].Terrain = 1;
+					EndOfGame.AlliesCaptureCitiesToWin(gameBoard.CityList.Count);
+					EndOfGame.GermanCaptureCitiesToWin(gameBoard.CityList.Count);
+					SetEnemyStrategy(STRATEGY.Mixed);
 					break;
 				case 4: // test forest cells
 					InitializeCustomGame(7, 6);
@@ -405,22 +354,105 @@ namespace BattleFieldOneCore
 					AllUnits.AddUnit(2, NATIONALITY.German, 0, 4);
 					AllUnits.AddUnit(2, NATIONALITY.Allied, 6, 0);
 					gameBoard.Map[6, 3].Terrain = 1;
+					EndOfGame.AlliesCaptureCitiesToWin(gameBoard.CityList.Count);
+					EndOfGame.GermanCaptureCitiesToWin(gameBoard.CityList.Count);
+					SetEnemyStrategy(STRATEGY.Mixed);
+					break;
+				case 5:
+					// normandy invasion
+					InitializeCustomGame(24, 8);
+					gameBoard.Map[2, 1].Terrain = 1;
+					gameBoard.Map[9, 0].Terrain = 1;
+					gameBoard.Map[15, 1].Terrain = 1;
+					gameBoard.Map[23, 1].Terrain = 1;
+
+					// add beach cells
+					for (int i = 0; i < 24; i++)
+					{
+						gameBoard.Map[i, 6].Terrain = 8;
+					}
+
+					// add ocean cells
+					for (int i = 0; i < 24; i++)
+					{
+						gameBoard.Map[i, 7].Terrain = 9;
+					}
+
+					gameBoard.Map[8, 5].Terrain = 8;
+					gameBoard.Map[9, 4].Terrain = 8;
+					gameBoard.Map[9, 5].Terrain = 8;
+					gameBoard.Map[10, 4].Terrain = 8;
+					gameBoard.Map[11, 4].Terrain = 8;
+					gameBoard.Map[12, 4].Terrain = 8;
+					gameBoard.Map[13, 5].Terrain = 8;
+					gameBoard.Map[12, 5].Terrain = 8;
+					gameBoard.Map[13, 6].Terrain = 8;
+
+					gameBoard.Map[10, 6].Terrain = 9;
+					gameBoard.Map[11, 6].Terrain = 9;
+					gameBoard.Map[12, 6].Terrain = 9;
+					gameBoard.Map[10, 5].Terrain = 9;
+					gameBoard.Map[11, 5].Terrain = 9;
+
+					gameBoard.Map[16, 3].Terrain = 7;
+					gameBoard.Map[16, 2].Terrain = 7;
+					gameBoard.Map[16, 1].Terrain = 7;
+					gameBoard.Map[17, 2].Terrain = 7;
+					gameBoard.Map[17, 1].Terrain = 7;
+					gameBoard.Map[17, 0].Terrain = 6;
+					gameBoard.Map[16, 0].Terrain = 6;
+					gameBoard.Map[18, 0].Terrain = 6;
+					gameBoard.Map[15, 0].Terrain = 6;
+
+					AllUnits.AddUnit(2, NATIONALITY.German, 2, 1);
+					AllUnits.AddUnit(2, NATIONALITY.German, 9, 0);
+					AllUnits.AddUnit(2, NATIONALITY.German, 15, 1);
+					AllUnits.AddUnit(1, NATIONALITY.German, 14, 1);
+					AllUnits.AddUnit(2, NATIONALITY.German, 23, 1);
+
+					AllUnits.AddUnit(1, NATIONALITY.Allied, 4, 5);
+					AllUnits.AddUnit(1, NATIONALITY.Allied, 5, 5);
+					AllUnits.AddUnit(1, NATIONALITY.Allied, 6, 5);
+					AllUnits.AddUnit(1, NATIONALITY.Allied, 7, 5);
+					AllUnits.AddUnit(1, NATIONALITY.Allied, 4, 6);
+					AllUnits.AddUnit(1, NATIONALITY.Allied, 5, 6);
+					AllUnits.AddUnit(1, NATIONALITY.Allied, 6, 6);
+					AllUnits.AddUnit(1, NATIONALITY.Allied, 7, 6);
+					AllUnits.AddUnit(3, NATIONALITY.Allied, 3, 6);
+					AllUnits.AddUnit(3, NATIONALITY.Allied, 8, 6);
+
+					EndOfGame.GermanCitiesToDefend(1);
+					EndOfGame.AlliesCaptureCitiesToWin(gameBoard.CityList.Count);
+					SetEnemyStrategy(STRATEGY.Defend);
 					break;
 			}
 
 			RecomputeMapMask();
 			RecomputeMapView();
-			SetEnemyStrategy();
 		}
 
 		//TODO: need to change the strategy if the enemy gets down to less units than cities
-		public void SetEnemyStrategy()
+		public void SetEnemyStrategy(STRATEGY strategy)
 		{
 			// split into 4 groups of units and set each group of units to a different city
 			int liTotalGermanUnits = AllUnits.TotalGermanUnits;
 
 			if (gameBoard.TotalCities == 0)
 			{
+				return;
+			}
+
+			if (strategy == STRATEGY.Defend)
+			{
+				for (int i = 0; i < AllUnits.Items.Count; i++)
+				{
+					if (AllUnits.Items[i].Nationality == NATIONALITY.German)
+					{
+						AllUnits.Items[i].Command = UNITCOMMAND.Defend;
+						AllUnits.Items[i].DestX = AllUnits.Items[i].X;
+						AllUnits.Items[i].DestY = AllUnits.Items[i].Y;
+					}
+				}
 				return;
 			}
 
@@ -461,16 +493,19 @@ namespace BattleFieldOneCore
 			// any remaining units, choose closest cities
 			for (int i = 0; i < AllUnits.Items.Count; i++)
 			{
-				if (AllUnits.Items[i].Command == UNITCOMMAND.None)
+				if (AllUnits.Items[i].Nationality == NATIONALITY.German)
 				{
-					MapCoordinates closestCity = gameBoard.FindClosestCity(AllUnits.Items[i].X, AllUnits.Items[i].Y);
-					if (closestCity != null)
+					if (AllUnits.Items[i].Command == UNITCOMMAND.None)
 					{
-						AllUnits.Items[i].Command = UNITCOMMAND.Destination;
-						AllUnits.Items[i].DestX = closestCity.X;
-						AllUnits.Items[i].DestY = closestCity.Y;
+						MapCoordinates closestCity = gameBoard.FindClosestCity(AllUnits.Items[i].X, AllUnits.Items[i].Y);
+						if (closestCity != null)
+						{
+							AllUnits.Items[i].Command = UNITCOMMAND.Destination;
+							AllUnits.Items[i].DestX = closestCity.X;
+							AllUnits.Items[i].DestY = closestCity.Y;
 
-						AllUnits.Items[i].ComputePath(gameBoard);
+							AllUnits.Items[i].ComputePath(gameBoard);
+						}
 					}
 				}
 			}
@@ -483,6 +518,20 @@ namespace BattleFieldOneCore
 			@out.Append("<input type='hidden' id='MaxX' value='" + gameBoard.MaxX + "' />");
 			@out.Append("<input type='hidden' id='MaxY' value='" + gameBoard.MaxY + "' />");
 			@out.Append("<input type='hidden' id='TestMode' value='" + (gameBoard.TestMode ? "1" : "0") + "' />");
+
+			@out.Append("<script>");
+			@out.Append("var TerrainMap = Array();");
+
+			for (int x = 0; x < gameBoard.MaxX; x++)
+			{
+				@out.Append("TerrainMap[" + x + "] = Array();");
+				for (int y = 0; y < gameBoard.MaxY; y++)
+				{
+					@out.Append("TerrainMap[" + x + "][" + y + "] = " + gameBoard.Map[x, y].Terrain+";");
+
+				}
+			}
+			@out.Append("</script>");
 
 			@out.Append("<svg xmlns='http://www.w3.org/2000/svg' version='1.1' width='" + ((gameBoard.MaxX + 1) * 54.75) + "' height='" + (gameBoard.MaxY * 31.25 * 2 + 31.25) + "' id='SVGObject'>");
 

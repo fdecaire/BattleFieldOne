@@ -377,7 +377,7 @@ namespace BattleFieldOneCore
 			{
 				for (int y = 0; y < MaxY; y++)
 				{
-					@out.Append(DrawTerrain(x, y, Map[x, y].Terrain));
+					@out.Append(Map[x, y].DrawTerrain(x, y));
 				}
 			}
 
@@ -396,43 +396,6 @@ namespace BattleFieldOneCore
 			double lnX = (15.75 + 39) * piX;
 			double lnY = 31.25 * (piX % 2) + piY * (31.25 * 2);
 			return "<image xlink:href='/Content/img/blank_hex.png' x='" + lnX + "' y='" + lnY + "' width='71' height='63' style='opacity:0.3; display:" + (plVisible ? "none" : "") + ";' id='View" + piX + "," + piY + "' />";
-		}
-
-		private string DrawTerrain(int piX, int piY, int terrainType)
-		{
-			double lnX = (15.75 + 39) * piX;
-			double lnY = 31.25 * (piX % 2) + piY * (31.25 * 2);
-
-			string hexPngName = "grass_background_hex";
-			switch (terrainType)
-			{
-				case 0:
-					hexPngName = "grass_background_hex";
-					break;
-				case 1:
-					hexPngName = "city_hex";
-					break;
-				case 2:
-					hexPngName = "terrain_grass_01";
-					break;
-				case 3:
-					hexPngName = "terrain_grass_02";
-					break;
-				case 4:
-					hexPngName = "terrain_grass_03";
-					break;
-				case 5:
-					hexPngName = "terrain_grass_04";
-					break;
-				case 6:
-					hexPngName = "mountains_01";
-					break;
-				case 7:
-					hexPngName = "forest_01";
-					break;
-			}
-
-			return "<image xlink:href='/Content/img/" + hexPngName + ".png' x='" + lnX + "' y='" + lnY + "' width='71' height='63' />";
 		}
 	}
 }

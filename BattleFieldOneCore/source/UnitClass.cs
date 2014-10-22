@@ -48,6 +48,12 @@ namespace BattleFieldOneCore
 					Movement = 3;
 					Range = 1;
 					break;
+				case 3: // artillery
+					Defense = 2;
+					Offense = 14;
+					Movement = 1;
+					Range = 3;
+					break;
 			}
 		}
 
@@ -83,6 +89,9 @@ namespace BattleFieldOneCore
 				case 2: // tank
 					@out.Append("<image xlink:href='/Content/img/tank.png' x='" + (0 - 12) + "' y='" + (0 - 6) + "' width='23' height='12' " + lsMouseEvents + " />");
 					break;
+				case 3: // artillery
+					@out.Append("<image xlink:href='/Content/img/artillery.png' x='" + (0 - 12) + "' y='" + (0 - 8) + "' width='23' height='25' " + lsMouseEvents + " />");
+					break;
 			}
 
 			// offense (upper left)
@@ -102,6 +111,9 @@ namespace BattleFieldOneCore
 
 			// unit attacked this turn flag (always hidden)
 			@out.Append("<text style='display:none;' x='" + (0) + "' y='" + (-23.5 + 12) + "' " + lsMouseEvents + " id='UnitAttackedThisTurn" + Number + "'>" + (UnitHasAttackedThisTurn ? "1" : "0") + "</text>");
+
+			// unit type
+			@out.Append("<text style='display:none;' x='" + (0) + "' y='" + (-23.5 + 12) + "' id='UnitType" + Number + "'>" + UnitType + "</text>");
 
 			@out.Append("</g>");
 

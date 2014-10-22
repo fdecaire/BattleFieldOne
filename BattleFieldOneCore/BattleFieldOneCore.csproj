@@ -61,12 +61,14 @@
     <Compile Include="source\MapCoordinates.cs" />
     <Compile Include="source\BattleFieldOneCommonObjects.cs" />
     <Compile Include="source\ShortestPath.cs" />
+    <Compile Include="source\StrategyEnum.cs" />
     <Compile Include="source\UnitClass.cs" />
     <Compile Include="source\UnitCommandEnum.cs" />
     <Compile Include="source\UnitsList.cs" />
+    <Compile Include="source\VictoryCalculator.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\UnitTestHelpers\UnitTestHelpers.csproj">
+    <ProjectReference Include="..\..\BattleFieldOne4\UnitTestHelpers\UnitTestHelpers.csproj">
       <Project>{cb5fec9f-7d74-4e55-bc03-8f90fe633498}</Project>
       <Name>UnitTestHelpers</Name>
     </ProjectReference>
