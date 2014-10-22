@@ -12,7 +12,12 @@ namespace BattleFieldOneCore
 		{
 			int liDieRoll = DieRoller.DieRoll() + DieRoller.DieRoll() + DieRoller.DieRoll();
 
-			if (liDieRoll > 9 && offense > 1)
+			if (liDieRoll > 10 && offense > 12)
+			{
+				return BATTLERESULT.EnemyTripleDamaged;
+			}
+
+			if (liDieRoll > 8 && offense > 1)
 			{
 				return BATTLERESULT.EnemyDoubleDamaged;
 			}

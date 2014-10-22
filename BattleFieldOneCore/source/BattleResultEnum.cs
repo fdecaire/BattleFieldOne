@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 
 namespace BattleFieldOneCore
 {
-	public enum BATTLERESULT 
-	{ 
-		None, 
-		EnemyDestroyed, 
-		DefenderDestroyed, 
-		EnemyDamaged, 
-		EnemyDoubleDamaged 
+	public enum BATTLERESULT
+	{
+		None,
+		EnemyDestroyed,
+		DefenderDestroyed,
+		EnemyDamaged,
+		EnemyDoubleDamaged,
+		EnemyTripleDamaged
 	};
 }

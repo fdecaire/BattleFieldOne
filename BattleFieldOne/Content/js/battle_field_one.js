@@ -511,7 +511,7 @@ function MouseUp(event)
 {
 	if (giUnitSelected > -1)
 	{
-		MouseUpUnit(giUnitSelected);
+			MouseUpUnit(giUnitSelected);
 	}
 
 	event.preventDefault();
@@ -1102,25 +1102,29 @@ function SnapTo(pMouse, range)
 		if (liX % 2 == 1)
 		{
 			// if odd, then y-1, y
-			if (liY > giUnitStartY)
+			if (liY > giUnitStartY + range)
 			{
 				liY = giUnitStartY;
+				//document.getElementById('testText').value = 'a';
 			}
-			else if (liY < giUnitStartY - range)
+			else if (liY < giUnitStartY - range - 1)
 			{
 				liY = giUnitStartY - range;
+				//document.getElementById('testText').value = 'b';
 			}
 		}
 		else
 		{
 			// if even, then y, y+1
-			if (liY < giUnitStartY)
+			if (liY < giUnitStartY - range - 1)
 			{
 				liY = giUnitStartY;
+				//document.getElementById('testText').value = 'c';
 			}
 			else if (liY > giUnitStartY + range)
 			{
 				liY = giUnitStartY + range;
+				//document.getElementById('testText').value = 'd';
 			}
 		}
 	}
@@ -1130,10 +1134,12 @@ function SnapTo(pMouse, range)
 		if (liY < giUnitStartY)
 		{
 			liY = giUnitStartY - range;
+			//document.getElementById('testText').value = 'e';
 		}
 		else
 		{
 			liY = giUnitStartY + range;
+			//document.getElementById('testText').value = 'f';
 		}
 	}
 

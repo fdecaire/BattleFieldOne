@@ -13,9 +13,6 @@ using log4net;
 //TODO: random city locations
 //TODO: add reinforcements according to cities captured
 //TODO: save/restore game from file saved on pc
-//TODO: enhance enemy attack to choose attacking piece more wisely (unit on city, or lowest defense first)
-
-//TODO: enhance conditions of victory
 
 namespace BattleFieldOneCore
 {
@@ -97,6 +94,14 @@ namespace BattleFieldOneCore
 								break;
 							case BATTLERESULT.EnemyDoubleDamaged:
 								AllUnits.Items[AlliedUnitIndex].Defense -= 2;
+								if (AllUnits.Items[AlliedUnitIndex].Defense <= 0)
+								{
+									AllUnits.Items[AlliedUnitIndex].Destroyed = true;
+									liBattleResult = BATTLERESULT.EnemyDestroyed;
+								}
+								break;
+							case BATTLERESULT.EnemyTripleDamaged:
+								AllUnits.Items[AlliedUnitIndex].Defense -= 3;
 								if (AllUnits.Items[AlliedUnitIndex].Defense <= 0)
 								{
 									AllUnits.Items[AlliedUnitIndex].Destroyed = true;
@@ -584,6 +589,14 @@ namespace BattleFieldOneCore
 						AllUnits.Items.RemoveAt(liGermanUnitIndex);
 						liBattleResult = BATTLERESULT.EnemyDestroyed;
 					}
+					break;
+				case BATTLERESULT.EnemyTripleDamaged:
+					AllUnits.Items[liGermanUnitIndex].Defense -= 3;
+					if (AllUnits.Items[liGermanUnitIndex].Defense <= 0)
+					{
+						AllUnits.Items.RemoveAt(liGermanUnitIndex);
+						liBattleResult = BATTLERESULT.EnemyDestroyed;
+					} 
 					break;
 			}
 
